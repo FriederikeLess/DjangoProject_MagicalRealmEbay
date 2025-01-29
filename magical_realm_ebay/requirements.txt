@@ -1,0 +1,12 @@
+asgiref==3.8.1
+Django==5.1.5
+django-debug-toolbar==4.4.6
+django-extensions==3.2.3
+django-profanity-filter==0.2.1
+inflection==0.5.1
+pillow==11.1.0
+psycopg==3.2.3
+psycopg-binary==3.2.3
+python-dotenv==1.0.1
+sqlparse==0.5.3
+typing_extensions==4.12.2
