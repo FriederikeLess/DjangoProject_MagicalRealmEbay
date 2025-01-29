@@ -5,12 +5,15 @@ services:
 
     image: postgres:17
 
+    env_file:
+      - .env
+
     restart: always
 
     environment:
-      - POSTGRES_DB=djangoexomarketdb
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
 
     volumes:
       - pgdata:/var/lib/postgresql/data
@@ -29,6 +32,9 @@ services:
 
     ports:
       - "8000:8000"
+    
+    env_file:
+      - .env
 
     command: bash -c "python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8000"
 
@@ -41,8 +47,13 @@ services:
 
     environment:
       - DEBUG=1
-      - DJANGO_SETTINGS_MODULE=travel_planner.settings
+      - DJANGO_SETTINGS_MODULE=exomarket.settings
       - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,[::1],db
+      - DB_HOST=db  # Docker-Container Host
+      - DB_NAME=${DATABASE_NAME}
+      - DB_USER=${DATABASE_USER}
+      - DB_PASSWORD=${DATABASE_PASSWORD}
+      - DB_PORT=${DATABASE_PORT}
 
 volumes:
   pgdata:

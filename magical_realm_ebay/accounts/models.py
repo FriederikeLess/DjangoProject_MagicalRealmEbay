@@ -20,18 +20,21 @@ class CustomUserProfile(AbstractUser):
     required fields: username, password, date_of_birth
     other fields are optional.
     """
+    # Choices for sex and profession fields had to be changed from dictionaries
+    # to list of tuples, because docker can't use Djgango version 5 or higher
+    # and the choices field in the model can't be a dictionary in lower Django
+    # versions
+    SEX_CHOICES = [("M", "Male"), ("F", "Female")]
 
-    SEX_CHOICES = {"M": "Male", "F": "Female"}
-
-    PROFESSION_CHOICES = {
-        "AM": "Amazon",
-        "NE": "Necromancer",
-        "BA": "Barbarian",
-        "MA": "Mage",
-        "PA": "Paladin",
-        "AS": "Assassin",
-        "DR": "Druid",
-    }
+    PROFESSION_CHOICES = [
+        ("AM", "Amazon"),
+        ("NE", "Necromancer"),
+        ("BA", "Barbarian"),
+        ("MA", "Mage"),
+        ("PA", "Paladin"),
+        ("AS", "Assassin"),
+        ("DR", "Druid"),
+    ]
 
     PHONE_VALIDATOR = [
         RegexValidator(

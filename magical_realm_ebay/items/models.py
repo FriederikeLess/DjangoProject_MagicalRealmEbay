@@ -44,13 +44,14 @@ class ItemCategory(models.Model):
 
 
 class Item(models.Model):
-    RARITY_CHOICES = {
-        "N": "Normal",
-        "M": "Magic",
-        "R": "Rare",
-        "S": "Set",
-        "U": "Unique",
-    }
+
+    RARITY_CHOICES = [
+        ("N", "Normal"),
+        ("M", "Magic"),
+        ("R", "Rare"),
+        ("S", "Set"),
+        ("U", "Unique"),
+    ]
     item_name = models.CharField(max_length=25)
     category = models.ForeignKey(
         ItemCategory, on_delete=models.CASCADE, related_name="items"
